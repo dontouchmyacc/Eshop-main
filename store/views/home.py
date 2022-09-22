@@ -1,3 +1,8 @@
+from msilib.schema import Class
+from multiprocessing import context
+from re import search, template
+from turtle import title
+from unicodedata import name
 from django.shortcuts import render , redirect , HttpResponseRedirect
 from store.models.product import Products
 from store.models.category import Category
@@ -57,4 +62,15 @@ def store(request):
     print('you are : ', request.session.get('email'))
     return render(request, 'index.html', data)
 
+class Search(View):
+    template_name = 'index.html'
+    context_object_name = 'products'
+    paginate_by = 5
 
+    def get_queryset(self):
+        return Products.objects.filter(title__icontains= self.request.GET.get('q'))
+    
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] =self.request.GET.get('q')
+        return context

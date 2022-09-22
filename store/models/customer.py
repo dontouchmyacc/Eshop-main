@@ -1,11 +1,15 @@
 from django.db import models
 
 class Customer(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField (max_length=50)
-    phone = models.CharField(max_length=10)
-    email=models.EmailField()
-    password = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=50,verbose_name='Имя')
+    last_name = models.CharField (max_length=50,verbose_name='Фамилия')
+    phone = models.CharField(max_length=10,verbose_name='Телефон')
+    email=models.EmailField(verbose_name='Е-мэйл')
+    password = models.CharField(max_length=100,verbose_name='Пароль')
+
+    class Meta:
+        verbose_name = 'Покупатель'
+        verbose_name_plural = 'Покупатели'
 
     #to save the data
     def register(self):

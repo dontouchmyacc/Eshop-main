@@ -4,7 +4,7 @@ register = template.Library()
 
 @register.filter(name='currency')
 def currency(number):
-    return str(number) + " тг." 
+    return str(number) + " KZT." 
 
 
 
